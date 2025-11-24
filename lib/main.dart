@@ -18,12 +18,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'CHẬU CẢNH',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Doanh nghiệp chậu cảnh'),
+      home: const MyHomePage(title: 'Doanh nghiệp Chậu Cảnh'),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
               tabs: [
                 Tab(icon: Icon(Icons.home), text: 'Trang chủ'),
                 Tab(icon: Icon(Icons.store), text: 'Sản phẩm'),
-                Tab(icon: Icon(Icons.add_box), text: 'Nhập nguyên liệu'),
+                Tab(icon: Icon(Icons.add_box), text: 'Nhập kho'),
                 Tab(icon: Icon(Icons.person), text: 'Thông tin'),
               ],
             ),
