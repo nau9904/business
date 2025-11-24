@@ -39,15 +39,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-      print("Add button pressed!" + _counter.toString());
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -60,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
               tabs: [
                 Tab(icon: Icon(Icons.home), text: 'Trang chủ'),
                 Tab(icon: Icon(Icons.store), text: 'Sản phẩm'),
-                Tab(icon: Icon(Icons.add_box), text: 'Nhập kho'),
+                Tab(icon: Icon(Icons.add_box), text: 'Nhập kho bãi'),
                 Tab(icon: Icon(Icons.person), text: 'Thông tin'),
               ],
             ),
