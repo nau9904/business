@@ -1,7 +1,9 @@
-import 'package:business/ViewPage/home.dart';
-import 'package:business/ViewPage/product.dart';
-import 'package:business/ViewPage/profile.dart';
+import 'package:business/ViewPage/about.dart';
+import 'package:business/ViewPage/contact.dart';
+import 'package:business/ViewPage/favorite.dart';
 import 'package:flutter/material.dart';
+
+import 'ViewPage/generator.dart';
 // import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 // Add this import
 
@@ -23,40 +25,81 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Doanh nghiệp Chậu Cảnh'),
+      home: MyHomePage(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  var selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 4,
-      child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-            title: Text(widget.title),
-            bottom: TabBar(
-              tabs: [
-                Tab(icon: Icon(Icons.home), text: 'Trang chủ'),
-                Tab(icon: Icon(Icons.store), text: 'Sản phẩm'),
-                Tab(icon: Icon(Icons.add_box), text: 'Nhập kho bãi'),
-                Tab(icon: Icon(Icons.person), text: 'Thông tin'),
+    Widget page;
+    switch (selectedIndex) {
+      case 0:
+        page = GeneratorPage();
+        break;
+      case 1:
+        page = Favorite();
+        break;
+      case 2:
+        page = About();
+        break;
+      case 3:
+        page = Contact();
+      default:
+        page = Center(child: Text('PAGE NOT FOUND 404'));
+    }
+
+    return Scaffold(
+      body: Row(
+        children: [
+          SafeArea(
+            child: NavigationRail(
+              extended: true,
+              destinations: const [
+                NavigationRailDestination(
+                  icon: Icon(Icons.home),
+                  label: Text('Home'),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.favorite),
+                  label: Text('Favorites'),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.person),
+                  label: Text('About'),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.email),
+                  label: Text('Contact'),
+                ),
               ],
+              selectedIndex: selectedIndex,
+              onDestinationSelected: (value) {
+                // print('selected: $value');
+                setState(() {
+                  selectedIndex = value;
+                });
+              },
             ),
           ),
-          body: TabBarView(children: [Home(), Product(10), Profile()])),
+          Expanded(
+            child: Container(
+              color: Theme.of(context).colorScheme.primaryContainer,
+              child: page,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
+
+// ...
