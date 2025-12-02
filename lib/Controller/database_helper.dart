@@ -1,53 +1,22 @@
-// import 'package:path/path.dart';
-// import 'package:sqflite/sqflite.dart';
-//
-// class DatabaseHelper {
-//   static final DatabaseHelper instance = DatabaseHelper._init();
-//   static Database? _database;
-//
-//   DatabaseHelper._init();
-//
-//   Future<Database> get database async {
-//     if (_database != null) return _database!;
-//     _database = await _initDB('items.db');
-//     return _database!;
-//   }
-//
-//   Future<Database> _initDB(String fileName) async {
-//     final dbPath = await getDatabasesPath();
-//     final path = join(dbPath, fileName);
-//
-//     print("Database path: $path");
-//
-//     return await openDatabase(
-//       path,
-//       version: 1,
-//       onCreate: _createDB,
-//     );
-//   }
-//
-//   Future<void> _createDB(Database db, int version) async {
-//     await db.execute('''
-//       CREATE TABLE items (
-//         id INTEGER PRIMARY KEY AUTOINCREMENT,
-//         name TEXT NOT NULL,
-//         quantity TEXT NOT NULL
-//       )
-//     ''');
-//   }
-//
-//   Future<int> insertItem(Map<String, dynamic> item) async {
-//     final db = await database;
-//     return await db.insert('items', item);
-//   }
-//
-//   Future<List<Map<String, dynamic>>> getAllItems() async {
-//     final db = await database;
-//     return await db.query('items');
-//   }
-//
-//   Future<int> deleteAllItems() async {
-//     final db = await database;
-//     return await db.delete('items');
-//   }
-// }
+import 'dart:convert';
+
+import 'package:flutter/services.dart' show rootBundle;
+
+import '../model/User.dart';
+
+Future<User?> loadUserById(int userId) async {
+  // Simulate a delay for loading user information
+  await Future.delayed(Duration(seconds: 2));
+  // Here you would typically load user info from a database or API
+  final String response = await rootBundle.loadString('assets/dummyData.json');
+  final data = await json.decode(response);
+
+  List usersJson = data['users'];
+  List<User> users = usersJson.map((user) => User.fromJson(user)).toList();
+
+  //Find user with id userId
+  return users.firstWhere(
+    (user) => user.id == userId,
+    // orElse: () => null,
+  );
+}

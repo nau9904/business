@@ -1,0 +1,45 @@
+
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "phone": "123-456-7890",
+      "address": "123 Street, Ha Noi, VietNam",
+      "email": "abc@gmail.com",
+      "password": "password123"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "phone": "987-654-3210",
+      "address": "456 Avenue, Ho Chi Minh, VietNam",
+      "email": "mmm@gmail.com",
+      "password": "password456"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Product 1",
+      "price": 100,
+      "description": "This is product 1",
+      "image": "https://via.placeholder.com/150"
+    },
+    {
+      "id": 2,
+      "name": "Product 2",
+      "price": 200,
+      "description": "This is product 2",
+      "image": "https://via.placeholder.com/150"
+    },
+    {
+      "id": 3,
+      "name": "Product 3",
+      "price": 300,
+      "description": "This is product 3",
+      "image": "https://via.placeholder.com/150"
+    }
+  ]
+}
+

@@ -1,6 +1,7 @@
-import 'package:business/ViewPage/about.dart';
+import 'package:business/Utils/showAlertDialog.dart';
 import 'package:business/ViewPage/contact.dart';
 import 'package:business/ViewPage/favorite.dart';
+import 'package:business/ViewPage/userInfoScreen.dart';
 import 'package:flutter/material.dart';
 
 import 'ViewPage/generator.dart';
@@ -49,10 +50,10 @@ class _MyHomePageState extends State<MyHomePage> {
         page = Favorite();
         break;
       case 2:
-        page = About();
+        page = Contact();
         break;
       case 3:
-        page = Contact();
+        page = UserInfoScreen();
       default:
         page = Center(child: Text('PAGE NOT FOUND 404'));
     }
@@ -73,12 +74,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   label: Text('Favorites'),
                 ),
                 NavigationRailDestination(
-                  icon: Icon(Icons.person),
-                  label: Text('About'),
-                ),
-                NavigationRailDestination(
                   icon: Icon(Icons.email),
                   label: Text('Contact'),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.person),
+                  label: Text('User'),
                 ),
               ],
               selectedIndex: selectedIndex,
@@ -98,6 +99,14 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () =>
+            showAlertDialog(context, "Setting title", "Setting content"),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+        child: const Icon(Icons.settings),
+        mini: true,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
     );
   }
 }
