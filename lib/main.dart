@@ -1,7 +1,7 @@
 import 'package:business/Utils/showAlertDialog.dart';
 import 'package:business/ViewPage/contact.dart';
 import 'package:business/ViewPage/favorite.dart';
-import 'package:business/ViewPage/userInfoScreen.dart';
+import 'package:business/ViewPage/login.dart';
 import 'package:flutter/material.dart';
 
 import 'ViewPage/generator.dart';
@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
         page = Contact();
         break;
       case 3:
-        page = UserInfoScreen();
+        page = LoginPage();
       default:
         page = Center(child: Text('PAGE NOT FOUND 404'));
     }
