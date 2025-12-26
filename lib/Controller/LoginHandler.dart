@@ -8,19 +8,26 @@ Future<void> handleLogin(
   // For demonstration, consider login successful if username and password are not empty
   if (username.isNotEmpty && password.isNotEmpty) {
     if (username == 'admin' && password == 'admin') {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Login Successful')),
-      );
+      isLoginSuccessful(context, true);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-            content: Text('Login Failed: Wrong username or password')),
-      );
+      isLoginSuccessful(context, false, 'Invalid username or password');
     }
   } else {
+    isLoginSuccessful(context, false, 'Username and password cannot be empty');
+  }
+}
+
+void isLoginSuccessful(BuildContext context, bool success, [String? message]) {
+  if (success) {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-          content: Text('Login Failed: Please enter valid credentials')),
+      const SnackBar(content: Text('Login Successful')),
+    );
+    // Navigate to homepage
+    print("Navigating to homepage...");
+    Navigator.pushReplacementNamed(context, '/homepage');
+  } else {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Login Failed: ${message ?? 'Unknown error'}')),
     );
   }
 }
