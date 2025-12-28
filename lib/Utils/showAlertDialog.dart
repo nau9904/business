@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 Future<void> showAlertDialog(
-    BuildContext context, String title, String content) async {
+    BuildContext context, String title, String ArgContent) async {
   showDialog<String>(
     context: context,
     builder: (BuildContext context) => AlertDialog(
       title: Text(title),
-      content: Text(content),
+      content: Text(ArgContent),
       actions: <Widget>[
         TextButton(
           onPressed: () => Navigator.pop(context, 'Cancel'),

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+final ValueNotifier<bool> loginState = ValueNotifier<bool>(false);
 
 Future<void> handleLogin(
     BuildContext context, String username, String password) async {
-  // Simulate a login process
-  // await Future.delayed(const Duration(seconds: 2));
-
   // For demonstration, consider login successful if username and password are not empty
+
   if (username.isNotEmpty && password.isNotEmpty) {
     if (username == 'admin' && password == 'admin') {
       isLoginSuccessful(context, true);
@@ -22,9 +23,10 @@ void isLoginSuccessful(BuildContext context, bool success, [String? message]) {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Login Successful')),
     );
+
+    loginState.value = true;
     // Navigate to homepage
-    print("Navigating to homepage...");
-    Navigator.pushReplacementNamed(context, '/homepage');
+    context.go('/home');
   } else {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('Login Failed: ${message ?? 'Unknown error'}')),

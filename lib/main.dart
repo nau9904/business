@@ -1,10 +1,12 @@
 import 'package:business/ViewPage/contact.dart';
 import 'package:business/ViewPage/favorite.dart';
 import 'package:business/ViewPage/login.dart';
+import 'package:business/ViewPage/userInfoScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:go_router/go_router.dart';
 
+import 'Controller/LoginHandler.dart';
 import 'Utils/showAlertDialog.dart';
 import 'ViewPage/generator.dart';
 // import 'package:sqflite_common_ffi/sqflite_ffi.dart';
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'CHẬU CẢNH',
+      title: 'STORE',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         useMaterial3: true,
@@ -34,84 +36,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-// class MyHomePage extends StatefulWidget {
-//   final Widget page = GeneratorPage();
-//   MyHomePage(Widget page);
-//   @override
-//   State<MyHomePage> createState() => MyShell(child: child)
-// }
-
-// class _MyHomePageState extends State<MyHomePage> {
-//   var selectedIndex = 0;
-//   Widget page
-//
-//   _MyHomePageState(this.page);
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Row(
-//         children: [
-//           SafeArea(
-//             child: NavigationRail(
-//               extended: true,
-//               destinations: const [
-//                 NavigationRailDestination(
-//                   icon: Icon(Icons.home),
-//                   label: Text('Home'),
-//                 ),
-//                 NavigationRailDestination(
-//                   icon: Icon(Icons.favorite),
-//                   label: Text('Favorites'),
-//                 ),
-//                 NavigationRailDestination(
-//                   icon: Icon(Icons.email),
-//                   label: Text('Contact'),
-//                 ),
-//                 NavigationRailDestination(
-//                   icon: Icon(Icons.person),
-//                   label: Text('User'),
-//                 ),
-//               ],
-//               selectedIndex: selectedIndex,
-//               onDestinationSelected: (value) {
-//                 setState(() => selectedIndex = value);
-//                 switch (value) {
-//                   case 0:
-//                     Navigator.pushReplacementNamed(context, '/home');
-//                     break;
-//                   case 1:
-//                     Navigator.pushReplacementNamed(context, '/favorite');
-//                     break;
-//                   case 2:
-//                     Navigator.pushReplacementNamed(context, '/contact');
-//                     break;
-//                   case 3:
-//                     Navigator.pushReplacementNamed(context, '/login');
-//                     break;
-//                 }
-//               },
-//             ),
-//           ),
-//           Expanded(
-//             child: Container(
-//               color: Theme.of(context).colorScheme.primaryContainer,
-//               child: page,
-//             ),
-//           ),
-//         ],
-//       ),
-//       floatingActionButton: FloatingActionButton(
-//         onPressed: () =>
-//             showAlertDialog(context, "Setting title", "Setting content"),
-//         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
-//         child: const Icon(Icons.settings),
-//         mini: true,
-//       ),
-//       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-//     );
-//   }
-// }
 
 final _router = GoRouter(
   initialLocation: '/home',
@@ -142,6 +66,10 @@ final _router = GoRouter(
           name: 'login',
           builder: (_, __) => const LoginPage(),
         ),
+        GoRoute(
+            path: '/userinfo',
+            name: 'userinfo',
+            builder: (_, __) => const UserInfoScreen()),
       ],
     ),
   ],
@@ -172,7 +100,8 @@ class MyShell extends StatelessWidget {
         context.go('/contact');
         break;
       case 3:
-        context.go('/login');
+        final destination = loginState.value ? '/userinfo' : '/login';
+        context.go(destination);
         break;
     }
   }
@@ -218,8 +147,8 @@ class MyShell extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () =>
-            showAlertDialog(context, "Setting title", "Setting content"),
+        onPressed: () => showAlertDialog(
+            context, "Setting title", "Setting message content"),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
         child: const Icon(Icons.settings),
         mini: true,

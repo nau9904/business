@@ -16,7 +16,9 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
         future: loadUserById(1),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
           }
 
           final user = snapshot.data!;
