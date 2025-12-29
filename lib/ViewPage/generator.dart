@@ -1,3 +1,4 @@
+import 'package:business/Component/card.dart';
 import 'package:flutter/material.dart';
 
 class GeneratorPage extends StatefulWidget {
@@ -35,8 +36,13 @@ class _GeneratorPageState extends State<GeneratorPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          BigCard(pair: current),
-          SizedBox(height: 10),
+          // BigCard(pair: current),
+          ProductCard(
+            title: "Product123456",
+            description: "This is a great product.",
+            price: "\$29.99",
+          ),
+          const SizedBox(height: 10),
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -45,7 +51,7 @@ class _GeneratorPageState extends State<GeneratorPage> {
                 icon: Icon(icon),
                 label: Text('Like'),
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               ElevatedButton(
                 onPressed: getNext,
                 child: Text('Next'),
